@@ -1,23 +1,34 @@
 import { Injectable } from '@nestjs/common';
-import { uuid } from 'uuidv4';
-import { CustomerDTO } from './dtos/customerDTO';
+import { v4 as uuidv4 } from 'uuid';
+import { Redis } from "ioredis"
 
 @Injectable()
 export class CustomersService {
-  
-  async createCustomer(customer) {
-    customer.id = uuid();
 
-    //persistence
+  async createCustomer(customer) {
+    const redis = new Redis();
+    customer.id = uuidv4();
+    await redis.set(`customer:${customer.id}`, JSON.stringify(customer));
     return customer;
   }
 
-  getCustomerById(): string {
-    return 'Hello World!';
+  async getCustomerById(id) {
+    const redis = new Redis();
+    const customer = await redis.get(`customer:${id}`, (err, result) => {
+      if (err) 
+        return (err);
+      return result;
+    });
+    return JSON.parse(customer);
   }
 
-  updateCustomerById(): string {
-    return 'Hello World!';
+  async updateCustomerById(id, customer) {
+    const redis = new Redis();
+    const result = await this.getCustomerById(id);
+    if (result != null) {
+      await redis.set(`customer:${customer.id}`, JSON.stringify(customer));  
+    }
+    return customer;
   }
 
 }

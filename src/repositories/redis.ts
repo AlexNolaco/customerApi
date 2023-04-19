@@ -1,7 +1,9 @@
 const redis = require('ioredis');
 const config = require('../config/app.config');
+import { Injectable } from '@nestjs/common';
 
-class RedisClient {
+@Injectable()
+class RedisBaseRepository {
     redisClient: any;
 
     constructor() {
@@ -44,5 +46,3 @@ class RedisClient {
         }
     }   
 }
-
-module.exports = RedisClient;

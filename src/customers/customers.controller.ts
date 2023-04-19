@@ -1,4 +1,4 @@
-import { Controller, Get, HttpStatus, Param, Post, Put, Req, Res } from '@nestjs/common';
+import { Controller, Get, HttpStatus, Param, Post, Put, Req, Res, Logger } from '@nestjs/common';
 import { CustomersService } from './customers.service';
 import { Response } from 'express';
 
@@ -8,6 +8,7 @@ export class CustomersController {
   
   @Post()
   createCustomer(@Req() req: Request, @Res() res: Response): any {
+    Logger.log("Teste");
     return this.customersService.createCustomer(req.body)
     .then((customer) => res.status(HttpStatus.CREATED).send(customer))
     .catch((err) => res.status(HttpStatus.BAD_GATEWAY).send('cache indisponível'));

@@ -8,7 +8,7 @@ export class CustomersController {
 
   @Post() //preciso de auth
   createCustomer(@Req() req: Request, @Res() res: Response): any {
-    Logger.log("Teste");
+    Logger.log("[POST] Create Customer Endpoint Touched");
     return this.customersService.createCustomer(req.body)
       .then((customer) => res.status(HttpStatus.CREATED).send(customer))
       .catch((err) => {

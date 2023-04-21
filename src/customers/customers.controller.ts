@@ -1,64 +1,90 @@
-import { Controller, Get, HttpStatus, Param, Post, Put, Req, Res, Logger } from '@nestjs/common';
+import { Controller, Get, HttpStatus, Param, Post, Put, Res, Logger, Body } from '@nestjs/common';
+import { Response } from 'express';
 import { CustomersService } from './customers.service';
-import { Request, Response, NextFunction } from 'express';
+import { CreateCustomerRequestModel } from './models/createCustomerRequest';
+import { updateCustomerRequestModel } from './models/updateCustomerRequest';
 
 @Controller('customers')
 export class CustomersController {
   constructor(private readonly customersService: CustomersService) { }
 
   @Post()
-  createCustomer(@Req() req: Request, @Res() res: Response): any {
-    Logger.log('[POST] createCustomer endpoint');
-    this.customersService.createCustomer(req.body)
+  createCustomer(@Body() req: CreateCustomerRequestModel, @Res() res: Response): any {
+    Logger.log('[POST] createCustomer endpoint', 'CustomersController');
+    this.customersService.createCustomer(req)
       .then((customer) => {
-        Logger.log('Customer created')
+        Logger.log('Created');
         return res.status(HttpStatus.CREATED).send(customer)
       })
       .catch((err) => {
-        Logger.error('Customer not created')
-        return res.status(HttpStatus.BAD_GATEWAY).send('cache indisponível')
+        Logger.error('Cache problem', 'Redis');
+        return res.status(HttpStatus.BAD_GATEWAY).json({
+          "statusCode": HttpStatus.BAD_GATEWAY,
+          "message": "cache indisponível",
+          "error": "Bad Gateway"
+        });
       });
   }
 
   @Get(':id')
-  getCustomerById(@Param('id') id: string, @Res() res: Response) {
-    Logger.log('[GET] getCustomerById endpoint');
+  getCustomerById(@Param('id') id: string, @Res() res: Response): any {
+    Logger.log('[GET] getCustomerById endpoint', 'CustomersController');
     this.customersService.getCustomerById(id)
       .then((customer) => {
         if (!customer) {
-          Logger.warn('Customer not found');
-          return res.status(HttpStatus.NOT_FOUND).send("cliente inexistente");
+          Logger.warn('Not Found');
+          return res.status(HttpStatus.NOT_FOUND).json({
+            "statusCode": HttpStatus.NOT_FOUND,
+            "message": "cliente inexistente",
+            "error": "Not Found"
+          });
         } else {
-          Logger.log('Customer returned')
+          Logger.log('Found');
           return res.status(HttpStatus.OK).send(customer);
         }
       })
       .catch((err) => {
-        res.status(HttpStatus.BAD_GATEWAY).send('cache indisponível')
+        Logger.error('Cache problem', 'Redis');
+        return res.status(HttpStatus.BAD_GATEWAY).json({
+          "statusCode": HttpStatus.BAD_GATEWAY,
+          "message": "cache indisponível",
+          "error": "Bad Gateway"
+        });
       });
   }
 
   @Put(':id')
-  updateCustomerById(@Param('id') id: string, @Req() req: Request, @Res() res: Response): any {
-    Logger.log('[PUT] updateCustomerById endpoint');
-
-    if (id !== req.body.id) {
+  updateCustomerById(@Param('id') id: string, @Body() req: updateCustomerRequestModel, @Res() res: Response): any {
+    Logger.log('[PUT] updateCustomerById endpoint', 'CustomersController');
+    if (id !== req.id) {
       Logger.warn('Id Conflict');
-      return res.status(HttpStatus.CONFLICT).send('conflito de ID')
+      return res.status(HttpStatus.CONFLICT).json({
+        "statusCode": HttpStatus.CONFLICT,
+        "message": "conflito de ID",
+        "error": "Conflict"
+      });
     }
-    this.customersService.updateCustomerById(id, req.body)
+    this.customersService.updateCustomerById(id, req)
       .then((customer) => {
         if (!customer) {
-          Logger.warn('Customer not found');
-          return res.status(HttpStatus.NOT_FOUND).send("cliente inexistente");
+          Logger.warn('Not Found');
+          return res.status(HttpStatus.NOT_FOUND).json({
+            "statusCode": HttpStatus.NOT_FOUND,
+            "message": "cliente inexistente",
+            "error": "Not Found"
+          });
         } else {
-          Logger.log('Customer updated')
+          Logger.log('Found');
           return res.status(HttpStatus.OK).send(customer)
         }
       })
       .catch((err) => {
-        Logger.error('Customer not updated')
-        return res.status(HttpStatus.BAD_GATEWAY).send('cache indisponível');
+        Logger.error('Cache problem', 'Redis');
+        return res.status(HttpStatus.BAD_GATEWAY).json({
+          "statusCode": HttpStatus.BAD_GATEWAY,
+          "message": "cache indisponível",
+          "error": "Bad Gateway"
+        });
       });
   }
 }

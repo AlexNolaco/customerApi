@@ -1,22 +1,22 @@
 const config = require('../config/app.config');
 import axios, { HttpStatusCode } from 'axios';
 import * as jwt from 'jsonwebtoken';
-import { NestMiddleware, Injectable, ForbiddenException, Logger } from '@nestjs/common';
+import { NestMiddleware, Injectable, Logger } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
 
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
   async use(req: Request, res: Response, next: NextFunction) {
-    Logger.log('[Token Checking]');
+    Logger.log('Token Checking', 'SSO');
     const token = req.headers.authorization;
     if (this.isInvalidToken(token)) {
-      Logger.error('[SSO] Unauthorized!')
+      Logger.error('Unauthorized!', 'SSO');
       return res.status(HttpStatusCode.Unauthorized).send('não autorizado');
     }
     else {
       const decodedJwt = jwt.decode(token.split(' ')[1]);
       if (!decodedJwt) {
-        Logger.error('[SSO] Unauthorized!')
+        Logger.error('Unauthorized!', 'SSO');
         return res.status(HttpStatusCode.Unauthorized).send('não autorizado');
       }
       else {
@@ -37,17 +37,17 @@ export class AuthMiddleware implements NestMiddleware {
 
         axios(options)
         .then((response) => {
-          Logger.log('[SSO] Result: ' + response.status)
-          Logger.log('[SSO] Authorized!')
+          Logger.log('Result: ' + response.status, 'SSO')
+          Logger.log('Authorized!', 'SSO')
           next();
         }).catch(err => {
-          Logger.error('[SSO] Result: ' + err.response.status)
+          Logger.error('Result: ' + err.response.status, 'SSO')
           if (err.response.status == HttpStatusCode.BadRequest) {
-            Logger.error('[SSO] Unauthorized!')
+            Logger.error('Unauthorized!', 'SSO')
             return res.status(HttpStatusCode.Unauthorized).send('não autorizado');
           }
           else {
-            Logger.warn('[SSO] Not Available')
+            Logger.warn('Not Available', 'SSO')
             return res.status(HttpStatusCode.BadGateway).send('sso indisponível'); 
           }
         });

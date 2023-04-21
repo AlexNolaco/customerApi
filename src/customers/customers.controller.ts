@@ -18,11 +18,7 @@ export class CustomersController {
       })
       .catch((err) => {
         Logger.error('Cache problem', 'Redis');
-        return res.status(HttpStatus.BAD_GATEWAY).json({
-          "statusCode": HttpStatus.BAD_GATEWAY,
-          "message": "cache indisponível",
-          "error": "Bad Gateway"
-        });
+        return this.badGatewayMessage(res);
       });
   }
 
@@ -45,11 +41,7 @@ export class CustomersController {
       })
       .catch((err) => {
         Logger.error('Cache problem', 'Redis');
-        return res.status(HttpStatus.BAD_GATEWAY).json({
-          "statusCode": HttpStatus.BAD_GATEWAY,
-          "message": "cache indisponível",
-          "error": "Bad Gateway"
-        });
+        return this.badGatewayMessage(res);
       });
   }
 
@@ -80,11 +72,15 @@ export class CustomersController {
       })
       .catch((err) => {
         Logger.error('Cache problem', 'Redis');
-        return res.status(HttpStatus.BAD_GATEWAY).json({
-          "statusCode": HttpStatus.BAD_GATEWAY,
-          "message": "cache indisponível",
-          "error": "Bad Gateway"
-        });
+        return this.badGatewayMessage(res);
       });
+  }
+
+  badGatewayMessage(res) {
+    return res.status(HttpStatus.BAD_GATEWAY).json({
+      "statusCode": HttpStatus.BAD_GATEWAY,
+      "message": "cache indisponível",
+      "error": "Bad Gateway"
+    });
   }
 }

@@ -11,13 +11,13 @@ export class AuthMiddleware implements NestMiddleware {
     const token = req.headers.authorization;
     if (this.isInvalidToken(token)) {
       Logger.error('Unauthorized!', 'SSO');
-      return res.status(HttpStatusCode.Unauthorized).send('não autorizado');
+      return this.notAuthorizedMessage(res);
     }
     else {
       const decodedJwt = jwt.decode(token.split(' ')[1]);
       if (!decodedJwt) {
         Logger.error('Unauthorized!', 'SSO');
-        return res.status(HttpStatusCode.Unauthorized).send('não autorizado');
+        return this.notAuthorizedMessage(res);
       }
       else {
         const params = new URLSearchParams({
@@ -44,11 +44,15 @@ export class AuthMiddleware implements NestMiddleware {
           Logger.error('Result: ' + err.response.status, 'SSO')
           if (err.response.status == HttpStatusCode.BadRequest) {
             Logger.error('Unauthorized!', 'SSO')
-            return res.status(HttpStatusCode.Unauthorized).send('não autorizado');
+            return this.notAuthorizedMessage(res);
           }
           else {
             Logger.warn('Not Available', 'SSO')
-            return res.status(HttpStatusCode.BadGateway).send('sso indisponível'); 
+            return res.status(HttpStatusCode.BadGateway).json({
+              "statusCode": HttpStatusCode.BadGateway,
+              "message": "sso indisponível",
+              "error": "Bad Gateway"
+            });
           }
         });
       }
@@ -59,6 +63,14 @@ export class AuthMiddleware implements NestMiddleware {
     return !token
       || token.split(' ').length !== 2
       || token.split(' ')[0] !== 'Bearer';
+  }
+
+  notAuthorizedMessage(res) {
+    return res.status(HttpStatusCode.Unauthorized).json({
+      "statusCode": HttpStatusCode.Unauthorized,
+      "message": "não autorizado",
+      "error": "Unauthorized"
+    });
   }
 }
 

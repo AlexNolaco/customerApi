@@ -6,14 +6,20 @@ import { Redis } from "ioredis"
 export class CustomersService {
 
   async createCustomer(customer) {
-    const redis = new Redis();
+    const redis = new Redis({
+      port: 6379, 
+      host: 'redis'
+    });
     customer.id = uuidv4();
     await redis.set(`customer:${customer.id}`, JSON.stringify(customer));
     return customer;
   }
 
   async getCustomerById(id) {
-    const redis = new Redis();
+    const redis = new Redis({
+      port: 6379, 
+      host: 'redis'
+    });
     const customer = await redis.get(`customer:${id}`, (err, result) => {
       if (err) 
         return (err);
@@ -23,7 +29,10 @@ export class CustomersService {
   }
 
   async updateCustomerById(id, customer) {
-    const redis = new Redis();
+    const redis = new Redis({
+      port: 6379, 
+      host: 'redis'
+    });
     let result = await this.getCustomerById(id);
     if (!result) 
       return result;

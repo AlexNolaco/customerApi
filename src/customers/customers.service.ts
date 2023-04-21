@@ -1,27 +1,35 @@
+const config = require('../config/app.config');
 import { Injectable } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
 import { Redis } from "ioredis"
 
 @Injectable()
 export class CustomersService {
+  redisInstance: Redis;
+
+  getInstance() {
+    if (this.redisInstance)
+      return this.redisInstance;
+    else {
+      this.redisInstance = new Redis({
+        port: config.redis_port, 
+        host: config.redis_host 
+      });
+      return this.redisInstance;
+    }
+  }
 
   async createCustomer(customer) {
-    const redis = new Redis({
-      port: 6379, 
-      host: 'redis'
-    });
+    this.getInstance();
     customer.id = uuidv4();
-    await redis.set(`customer:${customer.id}`, JSON.stringify(customer));
+    await this.redisInstance.set(`customer:${customer.id}`, JSON.stringify(customer));
     return customer;
   }
 
   async getCustomerById(id) {
-    const redis = new Redis({
-      port: 6379, 
-      host: 'redis'
-    });
-    const customer = await redis.get(`customer:${id}`, (err, result) => {
-      if (err) 
+    this.getInstance();
+    const customer = await this.redisInstance.get(`customer:${id}`, (err, result) => {
+      if (err)
         return (err);
       return result;
     });
@@ -29,16 +37,13 @@ export class CustomersService {
   }
 
   async updateCustomerById(id, customer) {
-    const redis = new Redis({
-      port: 6379, 
-      host: 'redis'
-    });
+    this.getInstance();
     let result = await this.getCustomerById(id);
-    if (!result) 
+    if (!result)
       return result;
     else {
-      await redis.set(`customer:${id}`, JSON.stringify(customer)); 
-      return customer; 
+      await this.redisInstance.set(`customer:${id}`, JSON.stringify(customer));
+      return customer;
     }
   }
 }

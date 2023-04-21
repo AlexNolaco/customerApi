@@ -24,8 +24,8 @@ export class AuthMiddleware implements NestMiddleware {
           client_secret: config.client_secret,
           client_id: decodedJwt.clientId,
           grant_type: 'client_credentials',
-          username: "alexsandernolaco@gmail.com", // todo mover
-          password: "YWxleHNhbmRlcm5vbGFjb0BnbWFpbC5jb20=" //todo: mover
+          username: config.api_user_email, 
+          password: config.api_password 
         });
 
         const options = {

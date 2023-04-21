@@ -19,6 +19,5 @@ export class CustomersModule implements NestModule {
         { path: 'customers/:id', method: RequestMethod.PUT },
         { path: 'customers/:id', method: RequestMethod.GET }
       )
-      
   }
 }

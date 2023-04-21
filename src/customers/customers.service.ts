@@ -24,11 +24,12 @@ export class CustomersService {
 
   async updateCustomerById(id, customer) {
     const redis = new Redis();
-    const result = await this.getCustomerById(id);
-    if (result != null) {
-      await redis.set(`customer:${customer.id}`, JSON.stringify(customer));  
+    let result = await this.getCustomerById(id);
+    if (!result) 
+      return result;
+    else {
+      await redis.set(`customer:${id}`, JSON.stringify(customer)); 
+      return customer; 
     }
-    return customer;
   }
-
 }

@@ -1,73 +1,65 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Customer API 1.0.0
+## Desafio Stone - Desenvolvedor Backend Node.JS Sênior 
+### Alex Sander Nolaço da Silveira
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+### Descrição
+Realização de um cadastro performático e seguro para os clientes da empresa.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+### Funcionalidades
+- Salvar um cliente novo
+- Atualizar um cliente existente
+- Buscar um cliente por ID
 
-## Description
+### Stack
+- NodeJS
+- NestJS
+- Axios
+- Typescript
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### Documentação
+Neste repositório há uma pasta 'documentation' ao qual terá:
+- Cenários de teste da API
+- Collection do postman para testes
 
-## Installation
-
+# Instruções de construção e execução local
+No diretório raiz do projeto execute:
 ```bash
-$ npm install
+ npm install
 ```
 
-## Running the app
+Após isso execute um dos comandos abaixo dependendo da necessidade:
 
 ```bash
-# development
-$ npm run start
+# modo de desenvolvimento
+ npm run start
 
-# watch mode
-$ npm run start:dev
+# modo de observação (a cada alteração realiza o rebuild)
+ npm run start:dev
 
-# production mode
-$ npm run start:prod
+# modo de produção
+ npm run start:prod
 ```
 
-## Test
+### Testes locais
 
 ```bash
-# unit tests
-$ npm run test
+# Executar os testes unitários
+npm run test
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+# Executar a cobertura de testes
+npm run test:cov
 ```
+ 
+# Processo de instalação em ambiente produtivo
+Esta solução utiliza imagens docker para execução, tive o cuidado de criar um arquivo docker-compose para criação da topologia do projeto ao qual provisiona uma instancia do banco de dados Redis, o expõe na porta 6379 e em sequência provisiona uma instância da customerAPI expondo a porta 3000 deixando assim a aplicação pronta para consumo, você poderá utilizar a collection do postman que deixei na documentação para testes.
 
-## Support
+```bash
+# Constroi
+docker-compose build
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+# Executa
+docker-compose up -d
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+# Constroi e executa
+docker-compose up --build
+```

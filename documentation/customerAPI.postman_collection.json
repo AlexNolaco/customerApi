@@ -1,0 +1,198 @@
+{
+	"info": {
+		"_postman_id": "b4d43815-5aad-40eb-a4f6-3e89510692c5",
+		"name": "customerAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Salvar um novo cliente",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIyTGYtamFReXZmQTNCN3dpVHZ3VkxhMjV1cHhiXzUtQXhZSDhmY3kySHhVIn0.eyJleHAiOjE2ODE5OTkyODYsImlhdCI6MTY4MTk5ODk4NiwianRpIjoiMDI3N2Q4YjYtN2Q0My00NmRlLThiYTgtNzcxNGQ3ZDg3NGM1IiwiaXNzIjoiaHR0cHM6Ly9hY2NvdW50cy5zZWd1cm9zLnZpdHRhLmNvbS5ici9hdXRoL3JlYWxtcy9jYXJlZXJzIiwic3ViIjoiNzk0ZmFkNjktMzkxNy00OThmLThhNjUtMWVjZGU5NjlmMGRiIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiY3VzdG9tZXJzIiwiYWNyIjoiMSIsInJlc291cmNlX2FjY2VzcyI6eyJjdXN0b21lcnMiOnsicm9sZXMiOlsidXNlciJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJjbGllbnRJZCI6ImN1c3RvbWVycyIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiY2xpZW50SG9zdCI6IjEwLjUwLjIuMTcxIiwicHJlZmVycmVkX3VzZXJuYW1lIjoic2VydmljZS1hY2NvdW50LWN1c3RvbWVycyIsImNsaWVudEFkZHJlc3MiOiIxMC41MC4yLjE3MSJ9.cbQeHntnYBGzJryPb6jl-BmVC9Q_niOTK1S3JoRPyYd3PZCLmmmVMSztBmvk35hznEOJC8wzeWGtDsnesig8_KVbf-eDin0dECTckqgcaovcfCPFkkxQaknagwfOL3TCaaLrjvJO7vISaScEPtE07Uhil3jbNjov2WiWukryF8eMHcGADwWTtXGbbUdF2fjA3dlUueDS6J-I3IN0AlMYObq2prmu1nyawmDozOsfNtvNX_vFA_--z0AhAenwVPrVaWHbWzHgN5Ks4r0WZvH0PcMTc9-T9yiXPy_AAVP3jS30RRvda0EFtpJBOpr2xzj-qCY2B-dWeSzia5WjKe1moA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"document\": 45973631060,\r\n    \"name\": \"Alex Sander Nolaço da Silveira\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/customers",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar um cliente",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIyTGYtamFReXZmQTNCN3dpVHZ3VkxhMjV1cHhiXzUtQXhZSDhmY3kySHhVIn0.eyJleHAiOjE2ODE5OTkyODYsImlhdCI6MTY4MTk5ODk4NiwianRpIjoiMDI3N2Q4YjYtN2Q0My00NmRlLThiYTgtNzcxNGQ3ZDg3NGM1IiwiaXNzIjoiaHR0cHM6Ly9hY2NvdW50cy5zZWd1cm9zLnZpdHRhLmNvbS5ici9hdXRoL3JlYWxtcy9jYXJlZXJzIiwic3ViIjoiNzk0ZmFkNjktMzkxNy00OThmLThhNjUtMWVjZGU5NjlmMGRiIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiY3VzdG9tZXJzIiwiYWNyIjoiMSIsInJlc291cmNlX2FjY2VzcyI6eyJjdXN0b21lcnMiOnsicm9sZXMiOlsidXNlciJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJjbGllbnRJZCI6ImN1c3RvbWVycyIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiY2xpZW50SG9zdCI6IjEwLjUwLjIuMTcxIiwicHJlZmVycmVkX3VzZXJuYW1lIjoic2VydmljZS1hY2NvdW50LWN1c3RvbWVycyIsImNsaWVudEFkZHJlc3MiOiIxMC41MC4yLjE3MSJ9.cbQeHntnYBGzJryPb6jl-BmVC9Q_niOTK1S3JoRPyYd3PZCLmmmVMSztBmvk35hznEOJC8wzeWGtDsnesig8_KVbf-eDin0dECTckqgcaovcfCPFkkxQaknagwfOL3TCaaLrjvJO7vISaScEPtE07Uhil3jbNjov2WiWukryF8eMHcGADwWTtXGbbUdF2fjA3dlUueDS6J-I3IN0AlMYObq2prmu1nyawmDozOsfNtvNX_vFA_--z0AhAenwVPrVaWHbWzHgN5Ks4r0WZvH0PcMTc9-T9yiXPy_AAVP3jS30RRvda0EFtpJBOpr2xzj-qCY2B-dWeSzia5WjKe1moA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"document\": 45973631060,\r\n    \"name\": \"Alex Sander Nolaço da Silveira\",\r\n    \"id\": \"165ec741-53c4-4034-adac-962c70324979\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/customers/123456",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"customers",
+						"123456"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar um cliente por ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " "
+				},
+				"url": {
+					"raw": "localhost:3000/customers/78bf71c0-821d-4b24-bfbe-53ed43b92006",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"customers",
+						"78bf71c0-821d-4b24-bfbe-53ed43b92006"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SSO Autenticação",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "customers",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "453000f7-47a0-4489-bc47-891c742650e2",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "alexsandernolaco@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "YWxleHNhbmRlcm5vbGFjb0BnbWFpbC5jb20=",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "openid",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://accounts.seguros.vitta.com.br/auth/realms/careers/protocol/openid-connect/token?grant_type%3Dclient_credentials=&client_id%3Dcustomers=&client_secret%3D453000f7-47a0-4489-bc47-891c742650e2=&username%3D<seu_email>=&password%3D<base64_de_seu_email>=&scope%3Dopenid=",
+					"protocol": "https",
+					"host": [
+						"accounts",
+						"seguros",
+						"vitta",
+						"com",
+						"br"
+					],
+					"path": [
+						"auth",
+						"realms",
+						"careers",
+						"protocol",
+						"openid-connect",
+						"token"
+					],
+					"query": [
+						{
+							"key": "grant_type%3Dclient_credentials",
+							"value": ""
+						},
+						{
+							"key": "client_id%3Dcustomers",
+							"value": ""
+						},
+						{
+							"key": "client_secret%3D453000f7-47a0-4489-bc47-891c742650e2",
+							"value": ""
+						},
+						{
+							"key": "username%3D<seu_email>",
+							"value": ""
+						},
+						{
+							"key": "password%3D<base64_de_seu_email>",
+							"value": ""
+						},
+						{
+							"key": "scope%3Dopenid",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

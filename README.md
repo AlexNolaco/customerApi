@@ -22,6 +22,8 @@ Neste repositório há uma pasta 'documentation' ao qual terá:
 - Cenários de teste da API
 - Collection do postman para testes
 
+No diretório raiz da api em localhost:3000 se econtra a documentação OpenApi (Swagger) do projeto para aferição dos (schemas, body e parameters) de todas as rotas disponíveis do projeto.
+
 # Instruções de construção e execução local
 No diretório raiz do projeto execute:
 ```bash

@@ -41,18 +41,16 @@ export class AuthMiddleware implements NestMiddleware {
           Logger.log('Authorized!', 'SSO')
           next();
         }).catch(err => {
-          Logger.error('Result: ' + err.response.status, 'SSO')
-          if (err.response.status == HttpStatusCode.BadRequest) {
+          if (err && !err.response) {
             Logger.error('Unauthorized!', 'SSO')
-            return this.notAuthorizedMessage(res);
-          }
-          else {
-            Logger.warn('Not Available', 'SSO')
             return res.status(HttpStatusCode.BadGateway).json({
               "statusCode": HttpStatusCode.BadGateway,
               "message": "sso indisponível",
               "error": "Bad Gateway"
             });
+          } else {
+            Logger.error('Unauthorized!', 'SSO')
+            return this.notAuthorizedMessage(res);
           }
         });
       }

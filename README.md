@@ -1,6 +1,7 @@
 # Customer API 1.0.0
 ## Desafio Stone - Desenvolvedor Backend Node.JS Sênior 
 ### Alex Sander Nolaço da Silveira
+https://www.linkedin.com/in/alexnolaco/
 
 ### Descrição
 Realização de um cadastro performático e seguro para os clientes da empresa.
@@ -63,3 +64,4 @@ docker-compose up -d
 # Constroi e executa
 docker-compose up --build
 ```
+

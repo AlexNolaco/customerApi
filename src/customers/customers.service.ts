@@ -1,7 +1,7 @@
 const config = require('../config/app.config');
 import { Injectable } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
-import { Redis } from "ioredis"
+import { Redis } from 'ioredis'
 
 @Injectable()
 export class CustomersService {

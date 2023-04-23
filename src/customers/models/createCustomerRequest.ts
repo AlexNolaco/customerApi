@@ -2,8 +2,8 @@ import {
     IsNumber,
     IsString,
     IsNotEmpty
-} from "class-validator";
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+} from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateCustomerRequestModel {
     @IsNumber()

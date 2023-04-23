@@ -7,7 +7,6 @@ import { Request, Response, NextFunction } from 'express';
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
   async use(req: Request, res: Response, next: NextFunction) {
-    Logger.log('Token Checking', 'SSO');
     const token = req?.headers?.authorization;
     if (this.isInvalidToken(token)) {
       return this.notAuthorizedMessage(res);
@@ -39,9 +38,9 @@ export class AuthMiddleware implements NestMiddleware {
         }).catch(err => {
           if (err && !err.response) {
             return res.status(HttpStatusCode.BadGateway).send({
-              "statusCode": HttpStatusCode.BadGateway,
-              "message": "sso indisponível",
-              "error": "Bad Gateway"
+              'statusCode': HttpStatusCode.BadGateway,
+              'message': 'sso indisponível',
+              'error': 'Bad Gateway'
             });
           } else {
             return this.notAuthorizedMessage(res);
@@ -59,9 +58,9 @@ export class AuthMiddleware implements NestMiddleware {
 
   notAuthorizedMessage(res) {
     return res.status(HttpStatusCode.Unauthorized).send({
-      "statusCode": HttpStatusCode.Unauthorized,
-      "message": "não autorizado",
-      "error": "Unauthorized"
+      'statusCode': HttpStatusCode.Unauthorized,
+      'message': 'não autorizado',
+      'error': 'Unauthorized'
     });
   }
 }

@@ -18,7 +18,7 @@ export class CustomersController {
   createCustomer(@Body() req: CreateCustomerRequestModel, @Res() res: Response): any {
     return this.customersService.createCustomer(req)
       .then((customer) => {
-        return res.status(HttpStatus.CREATED).send(customer)
+        return res.status(HttpStatus.CREATED).send(customer);
       })
       .catch((err) => {
         return this.badGatewayMessage(res);
@@ -35,9 +35,9 @@ export class CustomersController {
       .then((customer) => {
         if (!customer) {
           return res.status(HttpStatus.NOT_FOUND).send({
-            "statusCode": HttpStatus.NOT_FOUND,
-            "message": "cliente inexistente",
-            "error": "Not Found"
+            'statusCode': HttpStatus.NOT_FOUND,
+            'message': 'cliente inexistente',
+            'error': 'Not Found'
           });
         } else {
           return res.status(HttpStatus.OK).send(customer);
@@ -56,21 +56,21 @@ export class CustomersController {
   updateCustomerById(@Param('id') id: string, @Body() req: UpdateCustomerRequestModel, @Res() res: Response): any {
     if (id !== req.id) {
       return res.status(HttpStatus.CONFLICT).send({
-        "statusCode": HttpStatus.CONFLICT,
-        "message": "conflito de ID",
-        "error": "Conflict"
+        'statusCode': HttpStatus.CONFLICT,
+        'message': 'conflito de ID',
+        'error': 'Conflict'
       });
     }
     return this.customersService.updateCustomerById(id, req)
       .then((customer) => {
         if (!customer) {
           return res.status(HttpStatus.NOT_FOUND).send({
-            "statusCode": HttpStatus.NOT_FOUND,
-            "message": "cliente inexistente",
-            "error": "Not Found"
+            'statusCode': HttpStatus.NOT_FOUND,
+            'message': 'cliente inexistente',
+            'error': 'Not Found'
           });
         } else {
-          return res.status(HttpStatus.OK).send(customer)
+          return res.status(HttpStatus.OK).send(customer);
         }
       })
       .catch((err) => {
@@ -80,9 +80,9 @@ export class CustomersController {
 
   badGatewayMessage(res) {
     return res.status(HttpStatus.BAD_GATEWAY).send({
-      "statusCode": HttpStatus.BAD_GATEWAY,
-      "message": "cache indisponível",
-      "error": "Bad Gateway"
+      'statusCode': HttpStatus.BAD_GATEWAY,
+      'message': 'cache indisponível',
+      'error': 'Bad Gateway'
     });
   }
 }

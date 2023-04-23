@@ -4,7 +4,31 @@ import { CustomersController } from './customers.controller';
 import { CreateCustomerRequestModel } from './models/createCustomerRequest';
 import { Response } from 'express';
 import { UpdateCustomerRequestModel } from './models/updateCustomerRequest';
+class CustomersServiceMock {
+  async createCustomer(req: any, res: any) {
+    return {
+      'document': 45973631060,
+      'name': 'Alex Sander Nolaço da Silveira',
+      'id': '165ec741-53c4-4034-adac-962c70324979'
+    };
+  }
 
+  async getCustomerById(id: any, res: any) {
+    return {
+      'document': 45973631060,
+      'name': 'Alex Sander Nolaço da Silveira',
+      'id': '165ec741-53c4-4034-adac-962c70324979'
+    };
+  }
+
+  async updateCustomerById(id: any, req: any, res: any) {
+    return {
+      'document': 45973631060,
+      'name': 'Alex Sander Nolaço da Silveira',
+      'id': '165ec741-53c4-4034-adac-962c70324979'
+    };
+  }
+}
 describe('CustomersController Unit Tests', () => {
   let customersController: CustomersController;
   const CustomerServiceProvider = {
@@ -95,28 +119,3 @@ describe('CustomersController Unit Tests', () => {
   });
 });
 
-class CustomersServiceMock {
-  async createCustomer(req: any, res: any) {
-    return {
-      'document': 45973631060,
-      'name': 'Alex Sander Nolaço da Silveira',
-      'id': '165ec741-53c4-4034-adac-962c70324979'
-    };
-  }
-
-  async getCustomerById(id: any, res: any) {
-    return {
-      'document': 45973631060,
-      'name': 'Alex Sander Nolaço da Silveira',
-      'id': '165ec741-53c4-4034-adac-962c70324979'
-    };
-  }
-
-  async updateCustomerById(id: any, req: any, res: any) {
-    return {
-      'document': 45973631060,
-      'name': 'Alex Sander Nolaço da Silveira',
-      'id': '165ec741-53c4-4034-adac-962c70324979'
-    };
-  }
-}

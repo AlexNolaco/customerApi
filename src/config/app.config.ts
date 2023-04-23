@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 module.exports = {
     redis_host: process.env.REDIS_HOST || 'redis',
     redis_port: process.env.REDIS_PORT || 6379,

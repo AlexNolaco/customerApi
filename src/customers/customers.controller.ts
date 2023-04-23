@@ -18,7 +18,7 @@ export class CustomersController {
   createCustomer(@Body() req: CreateCustomerRequestModel, @Res() res: Response): any {
     Logger.log('[POST] createCustomer endpoint', 'CustomersController');
     this.customersService.createCustomer(req)
-      .then((customer) => {
+    .then((customer) => {
         Logger.log('Created');
         return res.status(HttpStatus.CREATED).send(customer)
       })
@@ -39,7 +39,7 @@ export class CustomersController {
       .then((customer) => {
         if (!customer) {
           Logger.warn('Not Found');
-          return res.status(HttpStatus.NOT_FOUND).json({
+          return res.status(HttpStatus.NOT_FOUND).send({
             "statusCode": HttpStatus.NOT_FOUND,
             "message": "cliente inexistente",
             "error": "Not Found"
@@ -64,7 +64,7 @@ export class CustomersController {
     Logger.log('[PUT] updateCustomerById endpoint', 'CustomersController');
     if (id !== req.id) {
       Logger.warn('Id Conflict');
-      return res.status(HttpStatus.CONFLICT).json({
+      return res.status(HttpStatus.CONFLICT).send({
         "statusCode": HttpStatus.CONFLICT,
         "message": "conflito de ID",
         "error": "Conflict"
@@ -74,7 +74,7 @@ export class CustomersController {
       .then((customer) => {
         if (!customer) {
           Logger.warn('Not Found');
-          return res.status(HttpStatus.NOT_FOUND).json({
+          return res.status(HttpStatus.NOT_FOUND).send({
             "statusCode": HttpStatus.NOT_FOUND,
             "message": "cliente inexistente",
             "error": "Not Found"
@@ -91,7 +91,7 @@ export class CustomersController {
   }
 
   badGatewayMessage(res) {
-    return res.status(HttpStatus.BAD_GATEWAY).json({
+    return res.status(HttpStatus.BAD_GATEWAY).send({
       "statusCode": HttpStatus.BAD_GATEWAY,
       "message": "cache indisponível",
       "error": "Bad Gateway"

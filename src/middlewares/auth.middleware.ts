@@ -8,15 +8,13 @@ import { Request, Response, NextFunction } from 'express';
 export class AuthMiddleware implements NestMiddleware {
   async use(req: Request, res: Response, next: NextFunction) {
     Logger.log('Token Checking', 'SSO');
-    const token = req.headers.authorization;
+    const token = req?.headers?.authorization;
     if (this.isInvalidToken(token)) {
-      Logger.error('Unauthorized!', 'SSO');
       return this.notAuthorizedMessage(res);
     }
     else {
       const decodedJwt = jwt.decode(token.split(' ')[1]);
       if (!decodedJwt) {
-        Logger.error('Unauthorized!', 'SSO');
         return this.notAuthorizedMessage(res);
       }
       else {
@@ -36,20 +34,16 @@ export class AuthMiddleware implements NestMiddleware {
         };
 
         axios(options)
-        .then((response) => {
-          Logger.log('Result: ' + response.status, 'SSO')
-          Logger.log('Authorized!', 'SSO')
+        .then(() => {
           next();
         }).catch(err => {
           if (err && !err.response) {
-            Logger.error('Unauthorized!', 'SSO')
-            return res.status(HttpStatusCode.BadGateway).json({
+            return res.status(HttpStatusCode.BadGateway).send({
               "statusCode": HttpStatusCode.BadGateway,
               "message": "sso indisponível",
               "error": "Bad Gateway"
             });
           } else {
-            Logger.error('Unauthorized!', 'SSO')
             return this.notAuthorizedMessage(res);
           }
         });
@@ -64,7 +58,7 @@ export class AuthMiddleware implements NestMiddleware {
   }
 
   notAuthorizedMessage(res) {
-    return res.status(HttpStatusCode.Unauthorized).json({
+    return res.status(HttpStatusCode.Unauthorized).send({
       "statusCode": HttpStatusCode.Unauthorized,
       "message": "não autorizado",
       "error": "Unauthorized"

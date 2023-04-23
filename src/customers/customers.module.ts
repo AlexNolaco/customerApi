@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { Module, NestModule, MiddlewareConsumer, RequestMethod  } from '@nestjs/common';
 import { CustomersController } from './customers.controller';
 import { CustomersService } from './customers.service';

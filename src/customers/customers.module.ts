@@ -14,7 +14,6 @@ export class CustomersModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(AuthMiddleware)
-      .exclude()
       .forRoutes(
         { path: 'customers', method: RequestMethod.POST },
         { path: 'customers/:id', method: RequestMethod.PUT },

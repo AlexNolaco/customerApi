@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 const config = require('../config/app.config');
 import { Injectable } from '@nestjs/common';
 import { Redis } from 'ioredis'

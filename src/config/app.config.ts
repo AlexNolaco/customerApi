@@ -1,6 +1,6 @@
 /* istanbul ignore file */
 module.exports = {
-    redis_host: process.env.REDIS_HOST || 'redis',
+    redis_host: process.env.REDIS_HOST || 'localhost',
     redis_port: process.env.REDIS_PORT || 6379,
     client_secret: '453000f7-47a0-4489-bc47-891c742650e2',
     api_user_email: 'alexsandernolaco@gmail.com',
